@@ -1,9 +1,11 @@
 package com.example.demo.repository;
 
+import com.example.demo.model.ClassCG;
 import com.example.demo.model.Student;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -12,8 +14,9 @@ import java.util.List;
 public class StudentRepository implements IStudentRepository{
     private static List<Student> studentList = new ArrayList<>();
     static {
-        studentList.add(new Student(1,"chánh1"));
-        studentList.add(new Student(2,"chánh2"));
+        studentList.add(new Student(1,"chánh1",1, Arrays.asList("C++","JAVA","PHP"),new ClassCG(1,"C09")));
+        studentList.add(new Student(2,"Hằng",0, Arrays.asList("C++","PHP"),new ClassCG(1,"C09")));
+        studentList.add(new Student(3,"ABC",-1, Arrays.asList("C++","PHP","SQL"),new ClassCG(1,"C09")));
     }
     @Override
     public List<Student> findAll() {

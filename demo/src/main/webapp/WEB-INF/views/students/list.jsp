@@ -15,12 +15,15 @@
 Danh sách sinh viên
 <a href="/students/add">Thêm mơi</a>
 <p style="color: red">${mess}</p>
-<table>
+<table border="1">
     <tr>
         <th>STT</th>
         <th>ID</th>
         <th>Name</th>
-        <th>Detail-RequestParam</th>
+        <th>Gender</th>
+        <th>Languages</th>
+        <th>Class</th>
+           <th>Detail-RequestParam</th>
         <th>Detail-PathVariable</th>
     </tr>
     <c:forEach var="student" items="${studentList}" varStatus="status">
@@ -28,6 +31,16 @@ Danh sách sinh viên
             <td>${status.count}</td>
             <td>${student.id}</td>
             <td>${student.name}</td>
+            <td>${student.gender}</td>
+            <td>
+                <c:forEach var="lang" items="${student.languages}">
+                    <span>${lang}</span>
+                </c:forEach>
+            </td>
+            <td>
+                ${student.classCG.name}
+            </td>
+
             <td>
                 <a href="/students/detail?id=${student.id}">Detail1</a>
             </td>
@@ -38,5 +51,6 @@ Danh sách sinh viên
         </tr>
     </c:forEach>
 </table>
+<h1>${languages.size()}</h1>
 </body>
 </html>

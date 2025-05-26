@@ -1,0 +1,18 @@
+package com.example.demo.service;
+
+import com.example.demo.model.ClassCG;
+import com.example.demo.repository.IClassRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ClassService implements IClassService{
+    @Autowired
+    private IClassRepository classRepository;
+    @Override
+    public List<ClassCG> findAll() {
+        return classRepository.findAll();
+    }
+}
