@@ -34,47 +34,5 @@
 <%--    <button>Save</button>--%>
 <%--</form>--%>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<%--<form:form modelAttribute="student" action="/student/create" method="post">--%>
-<%--    ID--%>
-<%--    <form:input path="id"/><br>--%>
-<%--    Name--%>
-<%--    <form:input path="name"/><br>--%>
-<%--    Gender--%>
-<%--    <form:select path="gender">--%>
-<%--        <form:option value="1">Nam</form:option>--%>
-<%--        <form:option value="0">Nữ</form:option>--%>
-<%--        <form:option value="-1">LGBT</form:option>--%>
-<%--    </form:select>--%>
-<%--    &lt;%&ndash;    <form:radiobutton path="gender" value="1"/>Nam&ndash;%&gt;--%>
-<%--    &lt;%&ndash;    <form:radiobutton path="gender" value="0"/>Nữ&ndash;%&gt;--%>
-<%--    &lt;%&ndash;    <form:radiobutton path="gender" value="-1"/>LBGT&ndash;%&gt;--%>
-<%--    Languages--%>
-<%--    <form:checkboxes path="languages" items="${ngonNgu}"/>--%>
-<%--    Class room--%>
-<%--    <form:select path="classRoom">--%>
-<%--        <form:options items="${classList}" itemValue="id" itemLabel="name" />--%>
-<%--    </form:select>--%>
-<%--    <form:button>Add</form:button>--%>
-<%--</form:form>--%>
 </body>
 </html>
