@@ -1,26 +1,24 @@
 package com.example.demo_spring_data_jpa.controller;
 
-import com.example.demo_spring_data_jpa.config.ClassCGEditor;
-import com.example.demo_spring_data_jpa.model.ClassCG;
 import com.example.demo_spring_data_jpa.model.Student;
 import com.example.demo_spring_data_jpa.service.IClassService;
 import com.example.demo_spring_data_jpa.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.Arrays;
-import java.util.List;
 
 
 @Controller
@@ -31,22 +29,31 @@ public class StudentController {
     private IStudentService studentService;
     @Autowired
     private IClassService classService;
+//    @GetMapping("")
+//    public String showList(ModelMap model){
+//        model.addAttribute("studentList", studentService.findAll());
+//        return "/students/list";
+//    }
+//    @GetMapping("")
+//    public String showList(@PageableDefault(size = 2,sort = "name", direction = Sort.Direction.ASC) Pageable pageable,
+//                           @RequestParam(required = false,defaultValue = "") String searchName,
+//                           ModelMap model){
+//        Page<Student> studentPage = studentService.findAll(searchName,pageable);
+//        model.addAttribute("studentPage", studentPage);
+//        model.addAttribute("searchName", searchName);
+//        return "/students/list";
+//    }
 
-    @Autowired
-    private ClassCGEditor classCGEditor;
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        binder.registerCustomEditor(ClassCG.class, classCGEditor);
-    }
-
-    @ModelAttribute("languages")// ứng dụng tạo session => bài 10
-    public List<String> getAllLanguage(){
-        System.out.println("---------------------languages--------------------------");
-        return Arrays.asList("JAVA","JS","PHP","SQL","C++");
-    }
     @GetMapping("")
-    public String showList(ModelMap model){
-        model.addAttribute("studentList", studentService.findAll());
+    public String showList(@RequestParam(required = false, defaultValue = "2") int size,
+                           @RequestParam(required = false,defaultValue = "0") int page,
+                           @RequestParam(required = false,defaultValue = "") String searchName,
+                           ModelMap model){
+        Sort sort = Sort.by(Sort.Direction.ASC,"name").and(Sort.by( Sort.Direction.DESC,"gender"));
+        Pageable pageable = PageRequest.of(page,size,sort);
+        Page<Student> studentPage = studentService.findAll(searchName,pageable);
+        model.addAttribute("studentPage", studentPage);
+        model.addAttribute("searchName", searchName);
         return "/students/list";
     }
     @GetMapping("/add")

@@ -18,12 +18,10 @@
     <input type="radio" th:field="*{gender}" th:value="0">Female
     <input type="radio" th:field="*{gender}" th:value="-1">LGBT<br>
 
-<!--    <label>Language</label>-->
-<!--    <input type="checkbox" th:field="*{languages}" th:each="lang:${languages}" th:value="${lang}" th:text="${lang}"><br>-->
-<!--    <label>Class</label>-->
-<!--    <select th:field="*{classCG}">-->
-<!--        <option th:each="cls:${classList}" th:value="${cls.id}" th:text="${cls.name}"></option>-->
-<!--    </select><br>-->
+    <label>Class</label>
+    <select th:field="*{classCG}">
+        <option th:each="cls:${classList}" th:value="${cls.id}" th:text="${cls.name}"></option>
+    </select><br>
     <button class="btn btn-primary btn-sm">Save</button>
 </form>
 </body>
