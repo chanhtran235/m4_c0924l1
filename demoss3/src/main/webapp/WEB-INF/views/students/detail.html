@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <th:block th:insert="/layout::libnary_title('Trang chi tiết')"></th:block>
 </head>
 <body>
-
+<th:block th:insert="layout::navbar"></th:block>
+<h1>Chi tiết</h1>
+<p>ID</p>
+<p th:text="${student.id}"></p>
+<p>Name</p>
+<p th:text="${student.name}"></p>
 </body>
 </html>

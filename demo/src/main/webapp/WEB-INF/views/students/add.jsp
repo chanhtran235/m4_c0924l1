@@ -23,16 +23,11 @@
     <form:radiobutton path="gender" value="-1"/>LGBT<br>
     <label>Languages</label>
     <form:checkboxes path="languages" items="${languages}"/><br>
-<%--    <form:select path="classCG">--%>
-<%--        <form:options items="${classList}" itemValue="id" itemLabel="name"/>--%>
-<%--    </form:select>--%>
+    <form:select path="classCG">
+        <form:options items="${classList}" itemValue="id" itemLabel="name"/>
+    </form:select>
     <button>Save</button>
 </form:form>
-<%--<form action="/students/add" method="post">--%>
-<%--    <input name="id" placeholder="Enter id">--%>
-<%--    <input name="name" placeholder="Enter name">--%>
-<%--    <button>Save</button>--%>
-<%--</form>--%>
 
 </body>
 </html>

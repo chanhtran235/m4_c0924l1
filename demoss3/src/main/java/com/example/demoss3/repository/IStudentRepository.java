@@ -1,6 +1,6 @@
-package com.example.demo.repository;
+package com.example.demoss3.repository;
 
-import com.example.demo.model.Student;
+import com.example.demoss3.model.Student;
 
 import java.util.List;
 

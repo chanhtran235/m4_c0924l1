@@ -1,7 +1,7 @@
-package com.example.demo.service;
+package com.example.demoss3.service;
 
-import com.example.demo.model.ClassCG;
-import com.example.demo.repository.IClassRepository;
+import com.example.demoss3.model.ClassCG;
+import com.example.demoss3.repository.IClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

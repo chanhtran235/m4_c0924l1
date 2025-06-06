@@ -2,6 +2,7 @@ package com.example.demo_thymeleaf.service;
 
 import com.example.demo_thymeleaf.model.Student;
 import com.example.demo_thymeleaf.repository.IStudentRepository;
+import com.example.demo_thymeleaf.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public class StudentService implements IStudentService{
 
     @Autowired
-    private IStudentRepository studentRepository;
+    private IStudentRepository studentRepository = new StudentRepository();
 
     @Override
     public List<Student> findAll() {

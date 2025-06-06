@@ -1,8 +1,11 @@
 package com.example.demo_spring_data_jpa.controller;
 
+import com.example.demo_spring_data_jpa.dto.StudentDto;
 import com.example.demo_spring_data_jpa.model.Student;
 import com.example.demo_spring_data_jpa.service.IClassService;
 import com.example.demo_spring_data_jpa.service.IStudentService;
+import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +15,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,13 +62,23 @@ public class StudentController {
     }
     @GetMapping("/add")
     public String showFormAdd(Model model){
-        model.addAttribute("student", new Student());
+        model.addAttribute("studentDto", new StudentDto());
         model.addAttribute("classList", classService.findAll());
         return "students/add";
     }
     @PostMapping("/add")
-    public String save(@ModelAttribute Student student, RedirectAttributes redirectAttributes){
-
+    public String save(@Valid @ModelAttribute StudentDto studentDto, BindingResult bindingResult,
+                       RedirectAttributes redirectAttributes,Model model){
+        // nếu custom validate thì can làm các bước
+        new StudentDto().validate(studentDto,bindingResult);
+       //
+        if (bindingResult.hasErrors()){
+            model.addAttribute("classList", classService.findAll());
+            return "students/add";
+        }
+        Student student = new Student();
+        // copy thuộc tính của studentDto => student (entiy)
+        BeanUtils.copyProperties(studentDto, student);
         studentService.add(student);
         redirectAttributes.addFlashAttribute("mess","add success");
         return "redirect:/students";
@@ -76,6 +90,7 @@ public class StudentController {
         model.addAttribute("student",student);
         return "students/detail";
     }
+
     @GetMapping("/detail/{id}")
     public String detail2(@PathVariable int id, Model model){
         // gọi service
@@ -83,4 +98,5 @@ public class StudentController {
         model.addAttribute("student",student);
         return "students/detail";
     }
+    
 }

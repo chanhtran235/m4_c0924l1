@@ -1,7 +1,7 @@
-package com.example.demo.config;
+package com.example.demoss3.config;
 
-import com.example.demo.model.ClassCG;
-import com.example.demo.service.IClassService;
+import com.example.demoss3.model.ClassCG;
+import com.example.demoss3.service.IClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

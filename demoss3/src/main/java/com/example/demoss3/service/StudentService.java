@@ -1,10 +1,8 @@
-package com.example.demo.service;
+package com.example.demoss3.service;
 
-import com.example.demo.model.Student;
-import com.example.demo.repository.IStudentRepository;
-import com.example.demo.repository.StudentRepository;
+import com.example.demoss3.model.Student;
+import com.example.demoss3.repository.IStudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

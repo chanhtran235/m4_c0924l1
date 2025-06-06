@@ -1,3 +1,5 @@
+package com.example.demoss3.config;
+
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

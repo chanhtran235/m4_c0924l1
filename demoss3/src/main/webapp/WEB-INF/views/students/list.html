@@ -2,10 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <th:block th:insert="~{layout::libnary_title('trang chủ')}"></th:block>
 </head>
 <body>
-<table>
+<th:block th:insert="layout::navbar"></th:block>
+<table border="1">
     <tr>
         <th>STT</th>
         <th>ID</th>
@@ -20,15 +21,24 @@
         <td th:text="${status.count}"></td>
         <td th:text="${student.id}"></td>
         <td th:text="${student.name}"></td>
-        <td th:text="${student.gender}"></td>
-        <td th:each="lang:${student.languages}">
-            <span th:text="${lang}"></span>
+        <td th:switch="${student.gender}">
+            <span th:case="1" th:text="Male"></span>
+            <span th:case="0" th:text="Female"></span>
+            <span th:case="*" th:text="LGB"></span>
+        </td>
+        <td >
+            <span th:each="lang:${student.languages}" th:text="${lang}"></span>
         </td>
         <td th:text="${student.classCG.name}"></td>
         <td>
-            <a>Detail1</a>
-            <a>Detail1</a>
+            <a th:href="@{/students/detail(id=${student.id})}">Detail1</a>
         </td>
+        <td>
+            <a th:href="@{/students/detail/__${student.id}__}">Detail1</a>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="6" th:if="${studentList.isEmpty()}" th:text="'Danh sách trống'"></td>
     </tr>
 </table>
 </body>

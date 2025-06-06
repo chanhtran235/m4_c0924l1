@@ -1,6 +1,6 @@
-package com.example.demo.service;
+package com.example.demoss3.service;
 
-import com.example.demo.model.ClassCG;
+import com.example.demoss3.model.ClassCG;
 
 import java.util.List;
 

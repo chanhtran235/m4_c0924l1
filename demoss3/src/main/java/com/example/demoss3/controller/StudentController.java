@@ -1,17 +1,16 @@
-package com.example.demo.controller;
+package com.example.demoss3.controller;
 
-import com.example.demo.config.ClassCGEditor;
-import com.example.demo.model.Student;
-import com.example.demo.service.IClassService;
-import com.example.demo.service.IStudentService;
-import com.example.demo.service.StudentService;
+import com.example.demoss3.config.ClassCGEditor;
+import com.example.demoss3.model.ClassCG;
+import com.example.demoss3.model.Student;
+import com.example.demoss3.service.IClassService;
+import com.example.demoss3.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Arrays;
@@ -26,19 +25,19 @@ public class StudentController {
     private IStudentService studentService;
     @Autowired
     private IClassService classService;
+//    @Autowired
+//    private ClassCGEditor classCGEditor;
+//    @InitBinder
+//    public void initBinder(WebDataBinder binder) {
+//        binder.registerCustomEditor(ClassCG.class, classCGEditor);
+//    }
 
-    @Autowired
-    private ClassCGEditor classCGEditor;
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        binder.registerCustomEditor(com.example.demo.model.ClassCG.class, classCGEditor);
-    }
-
-    @ModelAttribute("languages")// ứng dụng tạo session => bài 10
+    @ModelAttribute("languages")// binding kết quả trả về từ một method
     public List<String> getAllLanguage(){
         System.out.println("---------------------languages--------------------------");
         return Arrays.asList("JAVA","JS","PHP","SQL","C++");
     }
+
     @GetMapping("")
     public String showList(ModelMap model){
         model.addAttribute("studentList", studentService.findAll());
@@ -64,7 +63,7 @@ public class StudentController {
         model.addAttribute("student",student);
         return "students/detail";
     }
-    @GetMapping("/{id:[1-5]}/detail")
+    @GetMapping("/detail/{id}")
     public String detail2(@PathVariable int id, Model model){
         // gọi service
         Student student = studentService.findById(id);

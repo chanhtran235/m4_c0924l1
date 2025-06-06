@@ -27,4 +27,17 @@ public class ClassCG {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ClassCG)) return false;
+        ClassCG other = (ClassCG) o;
+        return this.id == other.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(id);
+    }
 }

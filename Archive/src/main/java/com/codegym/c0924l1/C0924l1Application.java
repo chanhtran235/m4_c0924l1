@@ -1,0 +1,13 @@
+package com.codegym.c0924l1;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class C0924l1Application {
+
+    public static void main(String[] args) {
+        SpringApplication.run(C0924l1Application.class, args);
+    }
+
+}

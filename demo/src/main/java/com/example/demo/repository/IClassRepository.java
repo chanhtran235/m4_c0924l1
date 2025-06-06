@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IClassRepository {
     List<ClassCG> findAll();
+    ClassCG findById(int id);
 }

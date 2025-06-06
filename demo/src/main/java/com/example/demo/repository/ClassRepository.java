@@ -2,11 +2,13 @@ package com.example.demo.repository;
 
 import com.example.demo.model.ClassCG;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+@Service
+
 public class ClassRepository implements IClassRepository{
     private static List<ClassCG> classCGList = new ArrayList<>();
     static {
@@ -17,5 +19,15 @@ public class ClassRepository implements IClassRepository{
     @Override
     public List<ClassCG> findAll() {
         return classCGList;
+    }
+
+    @Override
+    public ClassCG findById(int id) {
+        for (ClassCG cls: classCGList) {
+            if (cls.getId()==id){
+                return cls;
+            }
+        }
+        return null;
     }
 }

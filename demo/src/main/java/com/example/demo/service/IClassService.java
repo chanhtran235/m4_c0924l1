@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IClassService {
     List<ClassCG> findAll();
+    ClassCG findById(int id);
 }
