@@ -1,5 +1,6 @@
 package com.example.demo_spring_data_jpa.service;
 
+import com.example.demo_spring_data_jpa.exception.DuplicateAdminName;
 import com.example.demo_spring_data_jpa.model.Student;
 import com.example.demo_spring_data_jpa.repository.IStudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,10 @@ public class StudentService implements IStudentService{
     }
 
     @Override
-    public void add(Student student) {
+    public void add(Student student) throws DuplicateAdminName {
+        if (student.getName().equals("Admin")){
+            throw new DuplicateAdminName("Trùng tên admin");
+        }
         studentRepository.save(student);
     }
 

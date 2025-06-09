@@ -1,6 +1,7 @@
 package com.example.demo_spring_data_jpa.controller;
 
 import com.example.demo_spring_data_jpa.dto.StudentDto;
+import com.example.demo_spring_data_jpa.exception.DuplicateAdminName;
 import com.example.demo_spring_data_jpa.model.Student;
 import com.example.demo_spring_data_jpa.service.IClassService;
 import com.example.demo_spring_data_jpa.service.IStudentService;
@@ -16,12 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -53,6 +49,7 @@ public class StudentController {
                            @RequestParam(required = false,defaultValue = "0") int page,
                            @RequestParam(required = false,defaultValue = "") String searchName,
                            ModelMap model){
+
         Sort sort = Sort.by(Sort.Direction.ASC,"name").and(Sort.by( Sort.Direction.DESC,"gender"));
         Pageable pageable = PageRequest.of(page,size,sort);
         Page<Student> studentPage = studentService.findAll(searchName,pageable);
@@ -68,7 +65,7 @@ public class StudentController {
     }
     @PostMapping("/add")
     public String save(@Valid @ModelAttribute StudentDto studentDto, BindingResult bindingResult,
-                       RedirectAttributes redirectAttributes,Model model){
+                       RedirectAttributes redirectAttributes,Model model) throws DuplicateAdminName {
         // nếu custom validate thì can làm các bước
         new StudentDto().validate(studentDto,bindingResult);
        //
@@ -79,12 +76,18 @@ public class StudentController {
         Student student = new Student();
         // copy thuộc tính của studentDto => student (entiy)
         BeanUtils.copyProperties(studentDto, student);
+
         studentService.add(student);
+
         redirectAttributes.addFlashAttribute("mess","add success");
+        System.out.println("----- --------------thêm mơi thành công---------------");
         return "redirect:/students";
     }
     @GetMapping("/detail")
     public String detail1(@RequestParam int id, Model model){
+
+        System.out.println(12/0);
+
         // gọi service
         Student student = studentService.findById(id);
         model.addAttribute("student",student);
@@ -97,6 +100,11 @@ public class StudentController {
         Student student = studentService.findById(id);
         model.addAttribute("student",student);
         return "students/detail";
+    }
+
+    @ExceptionHandler(DuplicateAdminName.class)
+    public String handleException(){
+        return "admin-duplicate";
     }
     
 }
