@@ -29,11 +29,15 @@ public class StudentService implements IStudentService{
     }
 
     @Override
-    public void add(Student student) throws DuplicateAdminName {
-        if (student.getName().equals("Admin")){
-            throw new DuplicateAdminName("Trùng tên admin");
-        }
+    public void save(Student student){
+        // nếu id của student tồn tại trong db thì update
+        // nếu id không tồn tại thì thêm mới
         studentRepository.save(student);
+    }
+
+    @Override
+    public void deleteById(int id) {
+        studentRepository.deleteById(id);
     }
 
     @Override

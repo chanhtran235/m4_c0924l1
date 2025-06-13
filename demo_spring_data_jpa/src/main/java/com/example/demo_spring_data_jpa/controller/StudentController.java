@@ -12,7 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -77,7 +76,7 @@ public class StudentController {
         // copy thuộc tính của studentDto => student (entiy)
         BeanUtils.copyProperties(studentDto, student);
 
-        studentService.add(student);
+        studentService.save(student);
 
         redirectAttributes.addFlashAttribute("mess","add success");
         System.out.println("----- --------------thêm mơi thành công---------------");
