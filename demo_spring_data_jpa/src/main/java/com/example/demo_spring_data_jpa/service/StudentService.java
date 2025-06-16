@@ -29,6 +29,11 @@ public class StudentService implements IStudentService{
     }
 
     @Override
+    public Page<Student> findAll(Pageable pageable) {
+        return studentRepository.findAll(pageable);
+    }
+
+    @Override
     public void save(Student student){
         // nếu id của student tồn tại trong db thì update
         // nếu id không tồn tại thì thêm mới

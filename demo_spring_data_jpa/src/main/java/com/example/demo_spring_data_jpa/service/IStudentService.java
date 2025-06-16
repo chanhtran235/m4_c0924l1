@@ -9,6 +9,7 @@ import java.util.List;
 public interface IStudentService {
     List<Student> findAll();
     Page<Student> findAll(String searchName,Pageable pageable);
+    Page<Student> findAll(Pageable pageable);
     void save(Student student);
     void deleteById(int id);
     Student findById(int id);

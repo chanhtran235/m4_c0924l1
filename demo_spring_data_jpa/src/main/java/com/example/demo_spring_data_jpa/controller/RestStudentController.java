@@ -6,6 +6,9 @@ import com.example.demo_spring_data_jpa.model.Student;
 import com.example.demo_spring_data_jpa.service.IStudentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,19 +16,27 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1/students")
 public class RestStudentController {
     @Autowired
     private IStudentService studentService;
+//    @GetMapping("")
+//    public ResponseEntity<List<Student>> getAll(){
+//        List<Student> studentList = studentService.findAll();
+//        if (studentList.isEmpty()){
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204 thanh công nhưng không có trả về giá trị
+//        }
+//        return new ResponseEntity<>(studentList,HttpStatus.OK); // 200 : thành công có trả về giá trị
+//    }
     @GetMapping("")
-    public ResponseEntity<List<Student>> getAll(){
-        List<Student> studentList = studentService.findAll();
-        if (studentList.isEmpty()){
+    public ResponseEntity<Page<Student>> getAllPage(@PageableDefault(page = 0,size = 3)Pageable pageable){
+        Page<Student> studentPage = studentService.findAll(pageable);
+        if (studentPage.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204 thanh công nhưng không có trả về giá trị
         }
-        return new ResponseEntity<>(studentList,HttpStatus.OK); // 200 : thành công có trả về giá trị
+        return new ResponseEntity<>(studentPage,HttpStatus.OK); // 200 : thành công có trả về giá trị
     }
     @GetMapping("/{id}")
     public ResponseEntity<Student> getById(@PathVariable int id){
