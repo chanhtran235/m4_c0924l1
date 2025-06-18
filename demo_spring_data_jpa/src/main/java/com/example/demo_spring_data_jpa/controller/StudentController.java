@@ -84,9 +84,6 @@ public class StudentController {
     }
     @GetMapping("/detail")
     public String detail1(@RequestParam int id, Model model){
-
-        System.out.println(12/0);
-
         // gọi service
         Student student = studentService.findById(id);
         model.addAttribute("student",student);

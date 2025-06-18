@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <th:block th:insert="~{/layout::library}"/>
 </head>
 <body>
-<h1>Trang chủ</h1>
+<th:block th:insert="~{/layout::navbar}"/>
+<h1 th:text="#{navbar.home}"></h1>
 </body>
 </html>
